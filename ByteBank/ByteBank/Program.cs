@@ -1,75 +1,49 @@
-﻿using ByteBank.Contas;
-using ByteBank.Titular;
+﻿using ByteBank;
+using ByteBank.Contas;
+using ByteBank.Excecoes;
 
-//ContaCorrente contaDoAndre = new ContaCorrente
+//try
 //{
-//    Titular = "André Silva",
-//    NumeroAgencia = 15,
-//    Conta = "1010-X",
-//};
+//    ContaCorrente conta = new ContaCorrente(200, 540);
+//    ContaCorrente conta2 = new ContaCorrente(300, 550);
 
-//Console.WriteLine($"Saldo da conta do André = {contaDoAndre.Saldo}");
-
-//ContaCorrente contaDoAndre2 = new ContaCorrente
+//    conta.Depositar(50);
+//    Console.WriteLine(conta.Saldo);
+//    // conta.Sacar(500);
+//    conta.Transferir(500, conta2);
+//    Console.WriteLine(conta.Saldo);
+//}
+//catch (ArgumentException ex)
 //{
-//    Titular = "André Silva",
-//    NumeroAgencia = 15,
-//    Conta = "1010-X",
-//};
-
-//Console.WriteLine($"Saldo da conta do André = {contaDoAndre2.Saldo}");
-
-//Console.WriteLine(contaDoAndre == contaDoAndre2);
-
-//ContaCorrente contaDaMaria = new ContaCorrente
+//    Console.WriteLine($"Erro no parâmetro: {ex.ParamName}");
+//    Console.WriteLine("Ocorreu um erro do tipo ArguementException.");
+//    Console.WriteLine(ex.Message);
+//}
+//catch (SaldoInsuficienteException ex)
 //{
-//    Titular = "Maria Souza",
-//    NumeroAgencia = 17,
-//    Conta = "1010-5",
-//    Saldo = 350
-//};
-
-//Console.WriteLine($"Saldo da conta da Maria = {contaDaMaria.Saldo}");
-
-//contaDoAndre.Transferir(50, contaDaMaria);
-
-//Console.WriteLine($"Saldo da conta do André pós-transferência = {contaDoAndre.Saldo}");
-//Console.WriteLine($"Saldo da conta da Maria pós-transferência = {contaDaMaria.Saldo}");
-
-//ContaCorrente contaDoPedro = new ContaCorrente();
-//Console.WriteLine(contaDoPedro.Titular);
-//Console.WriteLine(contaDoPedro.Saldo);
-//Console.WriteLine(contaDoPedro.NumeroAgencia);
-//Console.WriteLine(contaDoPedro.Conta);
-
-//Cliente cliente = new Cliente
+//    Console.WriteLine(ex.Message);
+//}
+//catch (OperacaoFinanceiraException ex)
 //{
-//    Nome = "André Silva",
-//    Cpf = "12345678910",
-//    Profissao = "Análista"
-//};
+//    Console.WriteLine(ex.Message);
+//    Console.WriteLine("Informações da INNER EXCEPTION (exceção interna):");
+//    Console.WriteLine(ex.InnerException.Message);
 
-//ContaCorrente conta = new ContaCorrente
-//{
-//    Titular = cliente,
-//    Conta = "1010-X",
-//    NumeroAgencia = 15
-//};
+//}
 
-//conta.ExibirDadosDaConta();
+LeitorDeArquivo leitor = new LeitorDeArquivo("contas.txt");
 
-//ContaCorrente conta3 = new ContaCorrente();
-//conta3.Saldo = 50;
-//Console.WriteLine($"saldo conta3 {conta3.Saldo}");
-
-//ContaCorrente conta4 = new ContaCorrente(18, "1010-X");
-//conta4.Saldo = 500;
-//conta4.Titular = new Cliente();
-
-//Console.WriteLine(conta4.Saldo);
-//Console.WriteLine(conta4.NumeroAgencia);
-
-ContaCorrente conta5 = new ContaCorrente(283, "1234-X");
-Console.WriteLine(ContaCorrente.TotalDeContasCriadas);
-ContaCorrente conta6 = new ContaCorrente(284, "2223-X");
-Console.WriteLine(ContaCorrente.TotalDeContasCriadas);
+try
+{
+    leitor.LerProximaLinha();
+    leitor.LerProximaLinha();
+    leitor.LerProximaLinha();
+}
+catch (IOException)
+{
+    Console.WriteLine($"Exceção do tipo IO capturada e tratada");
+}
+finally
+{
+    leitor.Fechar();
+}
