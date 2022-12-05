@@ -1,0 +1,1 @@
+﻿var navegador = new Navegador();
