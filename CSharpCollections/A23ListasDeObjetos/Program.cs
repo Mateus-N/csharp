@@ -20,7 +20,9 @@ List<Aula> aulasCopiadas = new List<Aula>(cSharpColecoes.Aulas);
 aulasCopiadas.Sort();
 Imprimir(aulasCopiadas);
 
+
 Console.WriteLine(cSharpColecoes.TempoTotal);
+
 
 Console.WriteLine(cSharpColecoes);
 //var aulaIntro = new Aula("Introdução às Coleções", 20);
