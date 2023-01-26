@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Alura.ByteBank.Apresentacao": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:53805;http://localhost:53811"
+    }
+  }
+}
