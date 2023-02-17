@@ -43,6 +43,30 @@ public class FilmeService
 		if (filme == null) return null;
 		return mapper.Map<ReadFilmeDto>(filme);
 	}
+	
+	public ReadFilmeDto? Atualiza(int id, UpdateFilmeDto filmeDto)
+	{
+		var filme = context.Filmes.FirstOrDefault(filme => filme.Id == id);
+		if (filme == null) return null;
+		mapper.Map(filmeDto, filme);
+		context.SaveChanges();
+		return mapper.Map<ReadFilmeDto>(filme);
+	}
+
+	public UpdateFilmeDto? ValidaAtualizacaoParcial(int id, JsonPatchDocument<UpdateFilmeDto> patch)
+	{
+		var filme = context.Filmes.FirstOrDefault(filme => filme.Id == id);
+		if (filme == null) return null;
+		
+		return mapper.Map<UpdateFilmeDto>(filme);
+	}
+
+	public void AtualizaParcial(int id, UpdateFilmeDto updateDto)
+	{
+		var filme = context.Filmes.FirstOrDefault(filme => filme.Id == id);
+		mapper.Map(updateDto, filme);
+		context.SaveChanges();
+	}
 
 	public ReadFilmeDto? Deleta(int id)
 	{

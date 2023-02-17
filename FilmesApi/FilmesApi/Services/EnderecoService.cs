@@ -36,6 +36,15 @@ public class EnderecoService
 		return mapper.Map<ReadEnderecoDto>(endereco);
 	}
 
+	public ReadEnderecoDto? Atualiza(int id, UpdateEnderecoDto enderecoDto)
+	{
+		Endereco? endereco = context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
+		if (endereco == null) return null;
+		mapper.Map(enderecoDto, endereco);
+		context.SaveChanges();
+		return mapper.Map<ReadEnderecoDto>(endereco);
+	}
+
 	public ReadEnderecoDto? Deleta(int id)
 	{
 		Endereco? endereco = context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);

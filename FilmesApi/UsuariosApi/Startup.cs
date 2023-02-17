@@ -1,10 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using UsuariosApi.Data;
-using UsuariosApi.Models;
 using UsuariosApi.Services;
-
-namespace UsuariosApi;
 
 public class Startup
 {
@@ -20,7 +17,7 @@ public class Startup
 	{
 		services.AddDbContext<UserDbContext>(options =>
 			options.UseMySQL(Configuration.GetConnectionString("UsuarioConnection")));
-		services.AddIdentity<CustomIdentityUser, IdentityRole<int>>(
+		services.AddIdentity<IdentityUser<int>, IdentityRole<int>>(
 			opt => opt.SignIn.RequireConfirmedEmail = true
 			).AddEntityFrameworkStores<UserDbContext>()
 			.AddDefaultTokenProviders();

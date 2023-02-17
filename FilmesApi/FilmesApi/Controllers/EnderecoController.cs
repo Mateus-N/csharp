@@ -37,6 +37,14 @@ public class EnderecoController : ControllerBase
 		return Ok(readDto);
 	}
 	
+	[HttpPut("{id}")]
+	public IActionResult Atualiza(int id, [FromBody] UpdateEnderecoDto enderecoDto)
+	{
+		ReadEnderecoDto? readDto = enderecoService.Atualiza(id, enderecoDto);
+		if (readDto == null) return NotFound();
+		return NoContent();
+	}
+	
 	[HttpDelete("{id}")]
 	public IActionResult Deleta(int id)
 	{

@@ -20,13 +20,13 @@ public class CinemaController : ControllerBase
 	public IActionResult Adiciona([FromBody] CreateCinemaDto cinemaDto)
 	{
 		Cinema cinema = cinemaService.Adiciona(cinemaDto);
-		return CreatedAtAction(nameof(RecuperaPorId), new { cinema.Id }, cinema);
+		return CreatedAtAction(nameof(RecuperaPorId), new { Id = cinema.Id}, cinema);
 	}
 	
 	[HttpGet]
-	public IEnumerable<ReadCinemaDto> RecuperaTodos()
+	public IEnumerable<ReadCinemaDto> RecuperaTodos([FromQuery] int? enderecoId = null)
 	{
-		return cinemaService.RecuperaTodos();
+		return cinemaService.RecuperaTodos(enderecoId);
 	}
 	
 	[HttpGet("{id}")]
@@ -35,6 +35,14 @@ public class CinemaController : ControllerBase
 		ReadCinemaDto? readDto = cinemaService.RecuperaPorId(id);
 		if (readDto == null) return NotFound();
 		return Ok(readDto);
+	}
+	
+	[HttpPut("{id}")]
+	public IActionResult Atualiza(int id, [FromBody] UpdateCinemaDto cinemaDto)
+	{
+		ReadCinemaDto? readDto = cinemaService.Atualiza(id, cinemaDto);
+		if (readDto == null) return NotFound();
+		return NoContent();
 	}
 	
 	[HttpDelete("{id}")]

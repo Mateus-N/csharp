@@ -14,6 +14,7 @@ public class CinemaProfile : Profile
 				opt => opt.MapFrom(cinema => cinema.Endereco))
 			.ForMember(cinemaDto => cinemaDto.Sessoes,
 				opt => opt.MapFrom(cinema => cinema.Sessoes));
+		CreateMap<UpdateCinemaDto, Cinema>();
 		CreateMap<Cinema, ReadCinemaOnlyDto>()
 			.ForMember(cinemaDto => cinemaDto.Endereco,
 				opt => opt.MapFrom(cinema => cinema.Endereco));

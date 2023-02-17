@@ -1,14 +1,13 @@
 using FluentResults;
 using Microsoft.AspNetCore.Identity;
-using UsuariosApi.Models;
 
 namespace UsuariosApi.Services;
 
 public class LogoutService
 {
-	private readonly SignInManager<CustomIdentityUser> signInManager;
+	private SignInManager<IdentityUser<int>> signInManager;
 
-	public LogoutService(SignInManager<CustomIdentityUser> signInManager)
+	public LogoutService(SignInManager<IdentityUser<int>> signInManager)
 	{
 		this.signInManager = signInManager;
 	}

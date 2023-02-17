@@ -10,15 +10,14 @@ namespace UsuariosApi.Services;
 
 public class CadastroService
 {
-	private readonly IMapper mapper;
-	private readonly UserManager<CustomIdentityUser> userManager;
-	private readonly EmailService emailService;
+	private IMapper mapper;
+	private UserManager<IdentityUser<int>> userManager;
+	private EmailService emailService;
 
 	public CadastroService (
 		IMapper mapper,
-		UserManager<CustomIdentityUser> userManager,
-		EmailService emailService,
-        RoleManager<IdentityRole<int>> roleManager)
+		UserManager<IdentityUser<int>> userManager,
+		EmailService emailService)
 	{
 		this.mapper = mapper;
 		this.userManager = userManager;
@@ -28,21 +27,18 @@ public class CadastroService
 	public Result CadastraUsuario(CreateUsuarioDto createDto)
 	{
 		Usuario usuario = mapper.Map<Usuario>(createDto);
-		CustomIdentityUser usuarioIdentity = mapper.Map<CustomIdentityUser>(usuario);
-
-		Task<IdentityResult> resultadoIdentity = userManager
-			.CreateAsync(usuarioIdentity, createDto.Password);
-		userManager.AddToRoleAsync(usuarioIdentity, "regular");
+		IdentityUser<int> usuarioIdentity = mapper.Map<IdentityUser<int>>(usuario);
+		Task<IdentityResult> resultadoIdentity = userManager.CreateAsync(usuarioIdentity, createDto.Password);
 		if (resultadoIdentity.Result.Succeeded)
 		{
 			var code = userManager
 				.GenerateEmailConfirmationTokenAsync(usuarioIdentity).Result;
-			//var encodedCode = HttpUtility.UrlEncode(code);
-			//emailService.EnviarEmail(
-			//	new[] { usuarioIdentity.Email },
-			//	"Link de Ativação",
-			//	usuarioIdentity.Id,
-			//	encodedCode);
+			var encodedCode = HttpUtility.UrlEncode(code);
+			emailService.EnviarEmail(
+				new [] { usuarioIdentity.Email },
+				"Link de Ativação",
+				usuarioIdentity.Id,
+				encodedCode);
 			return Result.Ok().WithSuccess(code);
 		}
 		return Result.Fail("Falha ao cadastrar usuário");

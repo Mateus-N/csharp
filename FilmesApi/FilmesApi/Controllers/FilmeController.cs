@@ -3,7 +3,6 @@ using FilmesApi2.Models;
 using FilmesApi2.Data.Dtos;
 using Microsoft.AspNetCore.JsonPatch;
 using FilmesApi2.Services;
-using Microsoft.AspNetCore.Authorization;
 
 namespace FilmesApi2.Controllers;
 
@@ -11,7 +10,7 @@ namespace FilmesApi2.Controllers;
 [Route("[controller]")]
 public class FilmeController : ControllerBase
 {
-	private readonly FilmeService filmeService;
+	private FilmeService filmeService;
 	
 	public FilmeController(FilmeService filmeService)
 	{
@@ -19,7 +18,6 @@ public class FilmeController : ControllerBase
 	}
 	
 	[HttpPost]
-	[Authorize(Roles = "admin, regular", Policy = "IdadeMinima")]
 	public IActionResult Adiciona([FromBody] CreateFilmeDto filmeDto)
 	{
 		Filme filme = filmeService.Adiciona(filmeDto);
@@ -39,6 +37,30 @@ public class FilmeController : ControllerBase
 		ReadFilmeDto? readDto = filmeService.RecuperaPorId(id);
 		if (readDto == null) return NotFound();
 		return Ok(readDto);
+	}
+	
+	[HttpPut("{id}")]
+	public IActionResult Atualiza(int id, [FromBody] UpdateFilmeDto filmeDto)
+	{
+		ReadFilmeDto? readDto = filmeService.Atualiza(id, filmeDto);
+		if (readDto == null) return NotFound();
+		return NoContent();
+	}
+	
+	[HttpPatch("{id}")]
+	public IActionResult AtualizaParcial(int id, JsonPatchDocument<UpdateFilmeDto> patch)
+	{
+		UpdateFilmeDto? updateDto = filmeService.ValidaAtualizacaoParcial(id, patch);
+		if (updateDto == null) return NotFound();
+		
+		patch.ApplyTo(updateDto, ModelState);
+		if (!TryValidateModel(updateDto))
+		{
+			return ValidationProblem(ModelState);
+		}
+		
+		filmeService.AtualizaParcial(id, updateDto);
+		return NoContent();
 	}
 	
 	[HttpDelete("{id}")]
