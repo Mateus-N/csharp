@@ -9,7 +9,7 @@ namespace UsuariosApi.Controllers;
 [Route("[controller]")]
 public class LoginController : ControllerBase
 {
-	private LoginService loginService;
+	private readonly LoginService loginService;
 
 	public LoginController(LoginService loginService)
 	{
@@ -23,4 +23,20 @@ public class LoginController : ControllerBase
 		if (resultado.IsFailed) return Unauthorized(resultado.Errors.FirstOrDefault());
 		return Ok(resultado.Successes.FirstOrDefault());
 	}
+
+	[HttpPost("/solicita-reset")]
+	public IActionResult SolicitaResetSenhaUsuario(SolicitaResetRequest request)
+	{
+		Result resultado = loginService.SolicitaResetSenhaUsuario(request);
+        if (resultado.IsFailed) return Unauthorized(resultado.Errors.FirstOrDefault());
+        return Ok(resultado.Successes.FirstOrDefault());
+    }
+
+    [HttpPost("/efetua-reset")]
+    public IActionResult ResetaSenhaUsuario(EfetuaResetRequest request)
+    {
+        Result resultado = loginService.ResetaSenhaUsuario(request);
+        if (resultado.IsFailed) return Unauthorized(resultado.Errors.FirstOrDefault());
+        return Ok(resultado.Successes.FirstOrDefault());
+    }
 }
