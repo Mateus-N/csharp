@@ -1,0 +1,77 @@
+version: '3.4'
+
+volumes:
+  datausuarios:
+  datafilmes:
+
+services:
+  dbusuarios:
+    image: mysql:8.0.22
+    ports:
+      - "3308:3306"
+    volumes:
+      - datausuarios:/var/lib/mysql
+      - "~/sql-scripts/setup.sql:/docker-entrypoint-initdb.d/1.sql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: usuariodb
+    networks:
+      - usuarios-rede
+
+  usuariosapi:
+    build:
+      context: ./UsuariosApi
+      dockerfile: Dockerfile
+    depends_on:
+      - dbusuarios
+    ports:
+      - "6000:80"
+    restart: always
+    environment: 
+      - DBHOST=dbusuarios
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - usuarios-rede
+  
+  dbfilmes:
+    image: mysql:8.0.22
+    ports:
+      - "3306:3306"
+    volumes:
+      - datafilmes:/var/lib/mysqltwo
+      - "~/sql-scripts/setup.sql:/docker-entrypoint-initdb.d/1.sql"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: filmesdb
+    networks:
+      - filmes-rede
+
+  filmesapi:
+    build:
+      context: ./FilmesApi
+      dockerfile: Dockerfile
+    depends_on:
+      - dbfilmes
+    ports:
+      - "5000:80"
+    restart: always
+    environment: 
+      - DBHOST=dbfilmes
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - filmes-rede
+
+networks:
+  filmes-rede:
+    driver:
+      bridge
+  
+  usuarios-rede:
+    driver:
+      bridge

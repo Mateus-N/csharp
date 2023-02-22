@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using FilmesApi2.Models;
 using FilmesApi2.Data.Dtos;
-using Microsoft.AspNetCore.JsonPatch;
 using FilmesApi2.Services;
 using Microsoft.AspNetCore.Authorization;
 
