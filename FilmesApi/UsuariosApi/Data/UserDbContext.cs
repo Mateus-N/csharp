@@ -5,7 +5,7 @@ using UsuariosApi.Models;
 
 namespace UsuariosApi.Data;
 
-public class UserDbContext : IdentityDbContext<CustomIdentityUser, IdentityRole<int>, int>
+public class UserDbContext : IdentityDbContext<Usuario, IdentityRole<int>, int>
 {
 	public UserDbContext(DbContextOptions<UserDbContext> opt) : base(opt)
 	{
@@ -15,7 +15,7 @@ public class UserDbContext : IdentityDbContext<CustomIdentityUser, IdentityRole<
     {
         base.OnModelCreating(builder);
 
-        CustomIdentityUser admin = new CustomIdentityUser
+        Usuario admin = new Usuario
         {
             UserName = "admin",
             NormalizedUserName = "ADMIN",
@@ -26,10 +26,10 @@ public class UserDbContext : IdentityDbContext<CustomIdentityUser, IdentityRole<
             Id = 99999,
         };
 
-        PasswordHasher<CustomIdentityUser> hasher = new PasswordHasher<CustomIdentityUser>();
+        PasswordHasher<Usuario> hasher = new PasswordHasher<Usuario>();
         admin.PasswordHash = hasher.HashPassword(admin, "Admin123!");
 
-        builder.Entity<CustomIdentityUser>().HasData(admin);
+        builder.Entity<Usuario>().HasData(admin);
 
         builder.Entity<IdentityRole<int>>().HasData(
             new IdentityRole<int> { Id = 99999, Name = "admin", NormalizedName = "ADMIN" }

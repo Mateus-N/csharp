@@ -1,8 +1,6 @@
-using FilmesApi.Authorization;
 using FilmesApi2.Data;
 using FilmesApi2.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -42,20 +40,9 @@ public class Startup
                 IssuerSigningKey = new SymmetricSecurityKey(
                     Encoding.UTF8.GetBytes("0asdjas09djsa09djasdjsadajsd09asjd09sajcnzxn")),
                 ValidateIssuer = false,
-                ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero
+                ValidateAudience = false
             };
         });
-
-        services.AddAuthorization(opts =>
-        {
-            opts.AddPolicy("IdadeMinima", policy =>
-            {
-                policy.Requirements.Add(new IdadeMinimaRequired(18));
-            });
-        });
-
-        services.AddSingleton<IAuthorizationHandler, IdadeMinimaHandler>();
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

@@ -8,7 +8,7 @@ namespace UsuariosApi.Controllers;
 [Route("[controller]")]
 public class LogoutController : ControllerBase
 {
-	private LogoutService logoutService;
+	private readonly LogoutService logoutService;
 
 	public LogoutController(LogoutService logoutService)
 	{

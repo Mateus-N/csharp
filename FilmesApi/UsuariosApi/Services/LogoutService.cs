@@ -6,9 +6,9 @@ namespace UsuariosApi.Services;
 
 public class LogoutService
 {
-	private readonly SignInManager<CustomIdentityUser> signInManager;
+	private readonly SignInManager<Usuario> signInManager;
 
-	public LogoutService(SignInManager<CustomIdentityUser> signInManager)
+	public LogoutService(SignInManager<Usuario> signInManager)
 	{
 		this.signInManager = signInManager;
 	}

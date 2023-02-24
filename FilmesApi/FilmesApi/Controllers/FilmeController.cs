@@ -18,7 +18,7 @@ public class FilmeController : ControllerBase
 	}
 	
 	[HttpPost]
-	[Authorize(Roles = "admin, regular", Policy = "IdadeMinima")]
+	[Authorize(Roles = "admin, regular")]
 	public IActionResult Adiciona([FromBody] CreateFilmeDto filmeDto)
 	{
 		Filme filme = filmeService.Adiciona(filmeDto);
