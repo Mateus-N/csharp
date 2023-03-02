@@ -32,8 +32,8 @@ public class EmailSender : IEmailSender
         emailMessage.From.Add(new MailboxAddress("Serviço de email", emailConfig.From));
         emailMessage.To.AddRange(message.To);
         emailMessage.Subject = message.Subject;
-        emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html) 
-            { Text = string.Format("<h1 style='color:red'>{0}</h1>", message.Content) };
+        emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+        { Text = string.Format("<h1 style='color:red'>{0}</h1><p>{1}</p>", message.Title, message.Content) };
 
         return emailMessage;
     }

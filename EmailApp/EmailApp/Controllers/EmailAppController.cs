@@ -1,4 +1,5 @@
-﻿using EmailApp.Services;
+﻿using EmailApp.Dtos;
+using EmailApp.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmailApp.Controllers;
@@ -14,10 +15,15 @@ public class EmailAppController : ControllerBase
         this.emailSender = emailSender;
     }
 
-    [HttpGet]
-    public async Task Get()
+    [HttpPost]
+    public async Task SendEmailTo([FromBody] SendEmailDto sendEmailDto)
     {
-        var message = new Message(new string[] { "mateusnunes620@gmail.com" }, "test email", "Email Async");
+        var message = new Message(
+            new string[] { sendEmailDto.EmailTo },
+            sendEmailDto.Subject,
+            sendEmailDto.Title,
+            sendEmailDto.Body
+        );
         await emailSender.SendEmailAsync(message);
     }
 }
