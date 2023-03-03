@@ -235,15 +235,15 @@ namespace UsuariosApi.Migrations
                         {
                             Id = 99999,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "234aaa5f-cac6-4423-b964-4234781ca959",
+                            ConcurrencyStamp = "7a663dcd-df22-4bf5-bb3c-94339aad257c",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEER3oyE37RbnYbhTkiAaOCG0hd03EHJtFL+CJovXEusEHLh1ZyNH/4g26j7z2Qy6Cw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBR9UARJghRInoO2jVvD/4bAiHfMvO8gTWXOZPHcgueqDCfNxQ6kylwrKSejLaZgSw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "57b3a811-3cdb-41b5-ac9b-7e802d66abd3",
+                            SecurityStamp = "ed3a9ab1-159c-4410-89cb-1654da880bbf",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });

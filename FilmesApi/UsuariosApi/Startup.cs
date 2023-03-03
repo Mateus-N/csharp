@@ -20,7 +20,9 @@ public class Startup
 	{
 		services.AddDbContext<UserDbContext>(options =>
 			options.UseMySQL(Configuration.GetConnectionString("UsuarioConnection")));
-		services.AddIdentity<Usuario, IdentityRole<int>>()
+		services.AddIdentity<Usuario, IdentityRole<int>>(
+			opt => opt.SignIn.RequireConfirmedEmail = true
+			)
 			.AddEntityFrameworkStores<UserDbContext>()
 			.AddDefaultTokenProviders();
 
@@ -28,6 +30,8 @@ public class Startup
 		services.AddScoped<LoginService, LoginService>();
 		services.AddScoped<TokenService, TokenService>();
 		services.AddScoped<LogoutService, LogoutService>();
+		services.AddScoped<SendEmailService, SendEmailService>();
+		services.AddScoped<HttpClient, HttpClient>();
 		
 		services.AddControllers();
 		services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

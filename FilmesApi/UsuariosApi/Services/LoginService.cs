@@ -10,13 +10,13 @@ public class LoginService
 	private readonly SignInManager<Usuario> signInManager;
 	private readonly TokenService tokenService;
 
-	public LoginService(SignInManager<Usuario> signInManager, TokenService tokenService)
-	{
-		this.signInManager = signInManager;
-		this.tokenService = tokenService;
-	}
+    public LoginService(SignInManager<Usuario> signInManager, TokenService tokenService)
+    {
+        this.signInManager = signInManager;
+        this.tokenService = tokenService;
+    }
 
-	public Result LogaUsuario(LoginRequest request)
+    public Result LogaUsuario(LoginRequest request)
 	{
 		var resultadoIdentity = signInManager
 			.PasswordSignInAsync(request.Username, request.Password, false, false);

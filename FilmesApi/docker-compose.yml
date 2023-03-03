@@ -27,6 +27,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - dbusuarios
+      - emailapp
     ports:
       - "6000:80"
     restart: always
@@ -35,6 +36,14 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - usuarios-rede
+  
+  emailapp:
+    image: mateusnunesfrwk/email-app:1.0
+    ports:
+      - "9000:80"
+    restart: always
+    networks:
+      - filmes-rede
   
   dbfilmes:
     image: mysql:8.0.22

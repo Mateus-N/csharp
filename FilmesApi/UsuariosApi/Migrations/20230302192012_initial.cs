@@ -9,7 +9,7 @@ using MySql.EntityFrameworkCore.Metadata;
 namespace UsuariosApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -183,7 +183,7 @@ namespace UsuariosApi.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 99999, 0, "234aaa5f-cac6-4423-b964-4234781ca959", "admin@admin.com", true, false, null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAIAAYagAAAAEER3oyE37RbnYbhTkiAaOCG0hd03EHJtFL+CJovXEusEHLh1ZyNH/4g26j7z2Qy6Cw==", null, false, "57b3a811-3cdb-41b5-ac9b-7e802d66abd3", false, "admin" });
+                values: new object[] { 99999, 0, "7a663dcd-df22-4bf5-bb3c-94339aad257c", "admin@admin.com", true, false, null, "ADMIN@ADMIN.COM", "ADMIN", "AQAAAAIAAYagAAAAEBR9UARJghRInoO2jVvD/4bAiHfMvO8gTWXOZPHcgueqDCfNxQ6kylwrKSejLaZgSw==", null, false, "ed3a9ab1-159c-4410-89cb-1654da880bbf", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
