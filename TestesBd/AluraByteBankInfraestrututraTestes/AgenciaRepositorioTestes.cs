@@ -14,7 +14,7 @@ public class AgenciaRepositorioTestes
         var servico = new ServiceCollection();
         servico.AddTransient<IAgenciaRepositorio, AgenciaRepositorio>();
         var provedor = servico.BuildServiceProvider();
-        this.repositorio = provedor.GetService<IAgenciaRepositorio>();
+        repositorio = provedor.GetService<IAgenciaRepositorio>();
     }
 
     [Fact]
