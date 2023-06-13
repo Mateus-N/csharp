@@ -8,8 +8,8 @@ namespace TypeScriptApi.Services;
 
 public class DadoService : IDadoService, IInjetable
 {
-    public AppDbContext context { get; set; }
-    public IMapper mapper { get; set; }
+    private readonly AppDbContext context;
+    private readonly IMapper mapper;
 
     public DadoService(AppDbContext context, IMapper mapper)
     {
