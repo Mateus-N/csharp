@@ -7,8 +7,8 @@ namespace FilmesApi2.Services;
 
 public class EnderecoService
 {
-	private Context context;
-	private IMapper mapper;
+	private readonly Context context;
+	private readonly IMapper mapper;
 	
 	public EnderecoService(Context context, IMapper mapper)
 	{

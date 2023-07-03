@@ -8,8 +8,8 @@ namespace FilmesApi2.Services;
 
 public class FilmeService
 {
-	private Context context;
-	private IMapper mapper;
+	private readonly Context context;
+	private readonly IMapper mapper;
 	
 	public FilmeService(Context context, IMapper mapper)
 	{

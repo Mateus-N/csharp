@@ -7,8 +7,8 @@ namespace FilmesApi2.Services;
 
 public class SessaoService
 {
-	private Context context;
-	private IMapper mapper;
+	private readonly Context context;
+	private readonly IMapper mapper;
 	
 	public SessaoService(Context context, IMapper mapper)
 	{

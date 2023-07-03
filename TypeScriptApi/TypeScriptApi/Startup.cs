@@ -54,13 +54,13 @@ public class Startup
         Assembly assembly = Assembly.GetExecutingAssembly();
         Type interfaceType = typeof(IInjetable);
 
-        var classesImplementandoInterface = assembly.GetTypes()
+        List<Type>? classesImplementandoInterface = assembly.GetTypes()
             .Where(t => interfaceType.IsAssignableFrom(t) && !t.IsInterface)
             .ToList();
 
-        foreach (var classType in classesImplementandoInterface)
+        foreach (Type classType in classesImplementandoInterface)
         {
-            var interfaceTypes = classType.GetInterfaces()
+            Type interfaceTypes = classType.GetInterfaces()
                 .First(i => i.Name == $"I{classType.Name}");
 
             services.AddScoped(interfaceTypes, classType);
