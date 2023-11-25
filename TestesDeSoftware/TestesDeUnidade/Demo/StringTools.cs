@@ -1,6 +1,6 @@
 ﻿namespace Demo;
 
-public class StringsTools
+public class StringTools
 {
     public string Unir(string nome, string sobrenome)
     {

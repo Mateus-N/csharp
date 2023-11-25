@@ -1,20 +1,33 @@
-﻿double faturamentoSP = 67836.43;
-double faturamentoRJ = 36678.66;
-double faturamentoMG = 29229.88;
-double faturamentoES = 27165.48;
-double faturamentoOutros = 19849.53;
+﻿static int[] TwoSum(int[] nums, int target)
+{
+    nums = [.. nums.Order()];
 
-double faturamentoTotal = faturamentoSP + faturamentoRJ + faturamentoMG + faturamentoES + faturamentoOutros;
+    int i = 0;
+    int j = nums.Length - 1;
 
-double participacaoSP = (faturamentoSP / faturamentoTotal) * 100;
-double participacaoRJ = (faturamentoRJ / faturamentoTotal) * 100;
-double participacaoMG = (faturamentoMG / faturamentoTotal) * 100;
-double participacaoES = (faturamentoES / faturamentoTotal) * 100;
-double participacaoOutros = (faturamentoOutros / faturamentoTotal) * 100;
+    while (i < j)
+    {
+        int res = nums[i] + nums[j];
+
+        if (res == target)
+        {
+            return [nums[i], nums[j]];
+        }
+
+        if (res > target)
+        {
+            j--;
+        }
+
+        if (res < target)
+        {
+            i++;
+        }
+    }
+
+    return [];
+}
 
 
-Console.WriteLine($"Participação de SP: {participacaoSP:F2}");
-Console.WriteLine($"Participação de RJ: {participacaoRJ:F2}");
-Console.WriteLine($"Participação de MG: {participacaoMG:F2}");
-Console.WriteLine($"Participação de ES: {participacaoES:F2}");
-Console.WriteLine($"Participação de Outros: {participacaoOutros:F2}");
+int[] res = TwoSum([1, 2, 3, 4, 5, 6], 10);
+Console.WriteLine($"[{res[0]}, {res[1]}]");

@@ -4,17 +4,18 @@ public class Funcionario : Pessoa
 {
     public double Salario { get; private set; }
     public NivelProfissional NivelProfissional { get; private set; }
-    public IList<string>? Habilidades { get; private set; }
+    public IList<string> Habilidades { get; private set; }
 
-    public Funcionario(string nome, double salario) : base(nome)
+    public Funcionario(string nome, double salario)
     {
-        DefinirSalario(salario);
+        Nome = string.IsNullOrEmpty(nome) ? "Fulano" : nome;
+        Salario = salario;
         DefinirHabilidades();
     }
 
     public void DefinirSalario(double salario)
     {
-        if (salario < 500) throw new Exception("Salario inferior ao permitido");
+        if (salario < 500) throw new Exception("Salario inferior ao permiido");
 
         Salario = salario;
         if (salario < 2000) NivelProfissional = NivelProfissional.Junior;
@@ -25,11 +26,10 @@ public class Funcionario : Pessoa
     private void DefinirHabilidades()
     {
         var habilidadesBasicas = new List<string>()
-            {
-
-                "Lógica de Programação",
-                "OOP"
-            };
+        {
+            "Lógica de Programação",
+            "OOP"
+        };
 
         Habilidades = habilidadesBasicas;
 
