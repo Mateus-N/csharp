@@ -17,16 +17,16 @@ public class CinemaController : ControllerBase
 	}
 	
 	[HttpPost]
-	public IActionResult Adiciona([FromBody] CreateCinemaDto cinemaDto)
+	public IActionResult Adiciona(CreateCinemaDto cinemaDto)
 	{
 		Cinema cinema = cinemaService.Adiciona(cinemaDto);
 		return CreatedAtAction(nameof(RecuperaPorId), new { cinema.Id }, cinema);
 	}
 	
 	[HttpGet]
-	public IEnumerable<ReadCinemaDto> RecuperaTodos()
+	public IActionResult RecuperaTodos()
 	{
-		return cinemaService.RecuperaTodos();
+        return Ok(cinemaService.RecuperaTodos());
 	}
 	
 	[HttpGet("{id}")]
